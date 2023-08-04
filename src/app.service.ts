@@ -32,8 +32,8 @@ export class AppService implements OnModuleInit {
     this.data = {
       symbols: apiResponse.data.map((item) => {
         return {
-          bidPrice: new Decimal(item.bidPrice).times(1.01).toFixed(8).toString(),
-          askPrice: new Decimal(item.askPrice).times(1.01).toFixed(8).toString(),
+          bidPrice: new Decimal(item.bidPrice).times(new Decimal(1 + Number(process.env.SERVICE_COMMISSION))).toFixed(8).toString(),
+          askPrice: new Decimal(item.askPrice).times(new Decimal(1 + Number(process.env.SERVICE_COMMISSION))).toFixed(8).toString(),
           symbol: item.symbol,
         }
       }),
